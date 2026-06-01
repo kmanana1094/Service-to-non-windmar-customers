@@ -1,0 +1,767 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Windmar Home – Service to Non-Windmar Customers SOP</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&family=Open+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --blue: #1a3a6b;
+      --blue-dark: #0f2548;
+      --blue-mid: #1e4a8a;
+      --orange: #f7941d;
+      --orange-dark: #e07c0a;
+      --white: #ffffff;
+      --gray-light: #f4f6fa;
+      --gray: #e4e9f0;
+      --gray-mid: #b0bac8;
+      --gray-text: #5a6577;
+      --dark: #1a2437;
+      --green: #2a7a4a;
+      --green-bg: #e8f4ee;
+      --green-border: #a8d5b8;
+      --yellow-bg: #fff8ef;
+      --yellow-border: #ffd699;
+      --r: 10px;
+      --rs: 6px;
+      --shadow: 0 4px 24px rgba(26,58,107,0.10);
+      --shadow-sm: 0 2px 12px rgba(26,58,107,0.07);
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Open Sans', sans-serif; background: var(--gray-light); color: var(--dark); min-height: 100vh; }
+
+    /* NAV */
+    header {
+      background: linear-gradient(135deg, var(--blue-dark) 0%, var(--blue) 60%, var(--blue-mid) 100%);
+      position: sticky; top: 0; z-index: 200;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.22);
+    }
+    .header-inner {
+      max-width: 1140px; margin: 0 auto; padding: 14px 28px;
+      display: flex; align-items: center; justify-content: space-between; gap: 12px;
+    }
+    .brand { display: flex; align-items: center; gap: 12px; }
+    .brand-logo {
+      width: 44px; height: 44px; background: var(--orange); border-radius: 9px;
+      display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+    }
+    .brand-logo svg { width: 26px; height: 26px; }
+    .brand-name { font-family: 'Montserrat', sans-serif; font-weight: 800; font-size: 1.18rem; color: white; letter-spacing: 0.02em; line-height: 1.1; }
+    .brand-sub { font-size: 0.68rem; color: rgba(255,255,255,0.55); font-weight: 500; text-transform: uppercase; letter-spacing: 0.12em; }
+
+    .header-right { display: flex; align-items: center; gap: 14px; }
+
+    /* Tab nav */
+    .tab-nav { display: flex; gap: 4px; }
+    .tab-btn {
+      font-family: 'Montserrat', sans-serif; font-weight: 600; font-size: 0.72rem;
+      letter-spacing: 0.06em; padding: 7px 14px; border: none; border-radius: 50px;
+      cursor: pointer; transition: all 0.2s; color: rgba(255,255,255,0.6); background: transparent;
+      white-space: nowrap;
+    }
+    .tab-btn.active { background: rgba(255,255,255,0.15); color: white; }
+    .tab-btn:hover:not(.active) { color: rgba(255,255,255,0.85); }
+
+    /* Lang toggle */
+    .lang-toggle { display: flex; background: rgba(255,255,255,0.10); border: 1.5px solid rgba(255,255,255,0.2); border-radius: 50px; padding: 3px; gap: 2px; }
+    .lang-btn { font-family: 'Montserrat', sans-serif; font-weight: 700; font-size: 0.75rem; letter-spacing: 0.08em; padding: 6px 14px; border: none; border-radius: 50px; cursor: pointer; transition: all 0.22s; color: rgba(255,255,255,0.6); background: transparent; }
+    .lang-btn.active { background: var(--orange); color: white; box-shadow: 0 2px 10px rgba(247,148,29,0.4); }
+
+    /* HERO */
+    .hero { background: linear-gradient(90deg, var(--orange) 0%, var(--orange-dark) 100%); padding: 24px 28px; }
+    .hero-inner { max-width: 1140px; margin: 0 auto; display: flex; align-items: center; gap: 18px; }
+    .hero-icon { width: 52px; height: 52px; background: rgba(255,255,255,0.2); border-radius: 12px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+    .hero-text { flex: 1; }
+    .hero-title { font-family: 'Montserrat', sans-serif; font-weight: 900; font-size: 1.4rem; color: white; line-height: 1.2; }
+    .hero-sub { font-size: 0.85rem; color: rgba(255,255,255,0.82); margin-top: 4px; }
+    .sop-pill { background: rgba(255,255,255,0.22); border: 1.5px solid rgba(255,255,255,0.4); border-radius: 50px; padding: 6px 15px; font-family: 'Montserrat', sans-serif; font-weight: 700; font-size: 0.7rem; color: white; letter-spacing: 0.1em; text-transform: uppercase; white-space: nowrap; }
+
+    /* MAIN */
+    main { max-width: 1140px; margin: 0 auto; padding: 32px 28px 64px; }
+
+    /* TABS content */
+    .tab-pane { display: none; }
+    .tab-pane.active { display: block; }
+
+    /* ── SECTION LABEL ── */
+    .sec-label { font-family: 'Montserrat', sans-serif; font-weight: 800; font-size: 0.68rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--orange); margin-bottom: 14px; }
+
+    /* ── INTRO BOX ── */
+    .intro-box { background: white; border-radius: var(--r); border-left: 5px solid var(--blue); padding: 22px 26px; margin-bottom: 28px; box-shadow: var(--shadow-sm); font-size: 0.92rem; line-height: 1.7; color: var(--gray-text); }
+
+    /* ── CHANNEL CARDS (3 cols) ── */
+    .channel-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 18px; margin-bottom: 28px; }
+    .channel-card { background: white; border-radius: var(--r); box-shadow: var(--shadow-sm); overflow: hidden; }
+    .channel-card-head { background: linear-gradient(135deg, var(--blue) 0%, var(--blue-mid) 100%); padding: 18px 20px; display: flex; align-items: center; gap: 12px; }
+    .channel-icon { width: 38px; height: 38px; background: rgba(255,255,255,0.15); border-radius: 8px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+    .channel-title { font-family: 'Montserrat', sans-serif; font-weight: 700; font-size: 0.9rem; color: white; }
+    .channel-body { padding: 18px 20px; }
+    .channel-body ul { list-style: none; }
+    .channel-body li { display: flex; gap: 9px; align-items: flex-start; padding: 6px 0; border-bottom: 1px solid var(--gray); font-size: 0.83rem; line-height: 1.55; color: var(--dark); }
+    .channel-body li:last-child { border-bottom: none; }
+    .channel-body li::before { content: ''; width: 7px; height: 7px; background: var(--orange); border-radius: 50%; flex-shrink: 0; margin-top: 5px; }
+
+    /* ── LEAD PROCESS FLOW ── */
+    .flow-grid { display: grid; grid-template-columns: repeat(4,1fr); gap: 0; margin-bottom: 28px; position: relative; }
+    .flow-step { background: white; border-radius: 0; padding: 20px 18px; box-shadow: var(--shadow-sm); position: relative; border: 1px solid var(--gray); border-right: none; }
+    .flow-step:first-child { border-radius: var(--r) 0 0 var(--r); }
+    .flow-step:last-child { border-radius: 0 var(--r) var(--r) 0; border-right: 1px solid var(--gray); }
+    .flow-step-num { width: 30px; height: 30px; background: var(--blue); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-family: 'Montserrat', sans-serif; font-weight: 800; font-size: 0.78rem; color: white; margin-bottom: 10px; }
+    .flow-step-num.orange { background: var(--orange); }
+    .flow-arrow { position: absolute; right: -14px; top: 50%; transform: translateY(-50%); z-index: 2; background: var(--gray-light); border: 1.5px solid var(--gray); border-radius: 50%; width: 28px; height: 28px; display: flex; align-items: center; justify-content: center; }
+    .flow-step:last-child .flow-arrow { display: none; }
+    .flow-title { font-family: 'Montserrat', sans-serif; font-weight: 700; font-size: 0.82rem; color: var(--dark); margin-bottom: 8px; }
+    .flow-list { list-style: none; }
+    .flow-list li { font-size: 0.78rem; line-height: 1.5; color: var(--gray-text); padding: 3px 0; display: flex; gap: 7px; }
+    .flow-list li::before { content: '•'; color: var(--orange); flex-shrink: 0; }
+    .flow-sub { font-size: 0.72rem; color: var(--gray-mid); font-style: italic; padding-left: 13px; }
+
+    /* Assigned people */
+    .closer-list { list-style: none; margin-top: 6px; }
+    .closer-list li { font-size: 0.75rem; color: var(--blue); font-weight: 600; padding: 2px 0 2px 13px; display: flex; gap: 5px; align-items: center; }
+    .closer-list li::before { content: ''; width: 6px; height: 6px; background: var(--blue); border-radius: 50%; flex-shrink: 0; }
+
+    /* ── SERVICE CARDS ── */
+    .service-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(310px, 1fr)); gap: 18px; margin-bottom: 28px; }
+    .service-card { background: white; border-radius: var(--r); box-shadow: var(--shadow-sm); overflow: hidden; transition: box-shadow .2s, transform .2s; }
+    .service-card:hover { box-shadow: var(--shadow); transform: translateY(-2px); }
+    .card-head { background: linear-gradient(135deg, var(--blue) 0%, var(--blue-mid) 100%); padding: 16px 20px; display: flex; align-items: center; gap: 11px; }
+    .card-icon { width: 36px; height: 36px; background: rgba(255,255,255,0.15); border-radius: 7px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+    .card-title { font-family: 'Montserrat', sans-serif; font-weight: 700; font-size: 0.9rem; color: white; line-height: 1.2; }
+    .card-title-sub { font-size: 0.7rem; color: rgba(255,255,255,0.58); margin-top: 2px; }
+    .card-body { padding: 18px 20px; }
+    .included-list { list-style: none; margin-bottom: 14px; }
+    .included-list li { display: flex; gap: 9px; padding: 6px 0; border-bottom: 1px solid var(--gray); font-size: 0.82rem; line-height: 1.5; color: var(--dark); }
+    .included-list li:last-child { border-bottom: none; }
+    .bdot { width: 7px; height: 7px; border-radius: 50%; background: var(--orange); flex-shrink: 0; margin-top: 5px; }
+    .bdot.g { background: var(--gray-mid); }
+    .item-sub { display: block; font-size: 0.74rem; color: var(--gray-text); margin-top: 1px; }
+    .not-included { font-size: 0.74rem; color: var(--gray-text); font-style: italic; border-top: 1px dashed var(--gray); padding-top: 8px; margin-top: 4px; line-height: 1.5; }
+
+    /* warranty */
+    .warranty { display: inline-flex; align-items: center; gap: 7px; background: var(--gray-light); border: 1.5px solid var(--gray); border-radius: var(--rs); padding: 9px 13px; font-family: 'Montserrat', sans-serif; font-weight: 700; font-size: 0.68rem; letter-spacing: 0.05em; text-transform: uppercase; color: var(--gray-text); }
+    .warranty.yes { background: var(--green-bg); border-color: var(--green-border); color: var(--green); }
+    .warranty.yellow { background: var(--yellow-bg); border-color: var(--yellow-border); color: #b07800; }
+
+    /* ── POST SERVICE CYCLE ── */
+    .cycle-section { background: white; border-radius: var(--r); box-shadow: var(--shadow-sm); padding: 26px 28px; margin-bottom: 28px; }
+    .cycle-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 14px; }
+    .cycle-step { background: var(--gray-light); border-radius: 8px; padding: 16px; border-left: 4px solid var(--blue); position: relative; }
+    .cycle-step.orange-accent { border-left-color: var(--orange); }
+    .cycle-num { font-family: 'Montserrat', sans-serif; font-weight: 900; font-size: 1.4rem; color: var(--gray); line-height: 1; margin-bottom: 6px; }
+    .cycle-title { font-family: 'Montserrat', sans-serif; font-weight: 700; font-size: 0.82rem; color: var(--dark); margin-bottom: 4px; }
+    .cycle-desc { font-size: 0.78rem; color: var(--gray-text); line-height: 1.55; }
+
+    /* ── DOCS SECTION ── */
+    .docs-flow { display: flex; align-items: center; gap: 0; margin-bottom: 28px; flex-wrap: wrap; }
+    .doc-step { background: white; border-radius: var(--r); box-shadow: var(--shadow-sm); padding: 18px 20px; flex: 1; min-width: 160px; text-align: center; }
+    .doc-icon { width: 44px; height: 44px; background: var(--blue); border-radius: 10px; display: flex; align-items: center; justify-content: center; margin: 0 auto 10px; }
+    .doc-title { font-family: 'Montserrat', sans-serif; font-weight: 700; font-size: 0.82rem; color: var(--dark); margin-bottom: 4px; }
+    .doc-desc { font-size: 0.75rem; color: var(--gray-text); line-height: 1.5; }
+    .doc-arrow { color: var(--orange); font-size: 1.4rem; font-weight: 900; padding: 0 8px; flex-shrink: 0; }
+
+    /* ── SPIFF TABLE ── */
+    .spiff-table { width: 100%; border-collapse: collapse; background: white; border-radius: var(--r); overflow: hidden; box-shadow: var(--shadow-sm); margin-bottom: 28px; }
+    .spiff-table thead { background: var(--blue); }
+    .spiff-table thead th { color: white; font-family: 'Montserrat', sans-serif; font-weight: 700; font-size: 0.78rem; letter-spacing: 0.06em; text-transform: uppercase; padding: 14px 20px; text-align: left; }
+    .spiff-table tbody tr { border-bottom: 1px solid var(--gray); }
+    .spiff-table tbody tr:last-child { border-bottom: none; }
+    .spiff-table tbody td { padding: 13px 20px; font-size: 0.85rem; vertical-align: middle; }
+    .spiff-table tbody tr:hover { background: var(--gray-light); }
+    .status-yes { display: inline-flex; align-items: center; gap: 6px; color: var(--green); font-family: 'Montserrat', sans-serif; font-weight: 700; font-size: 0.8rem; }
+    .status-no { display: inline-flex; align-items: center; gap: 6px; color: #c0392b; font-family: 'Montserrat', sans-serif; font-weight: 700; font-size: 0.8rem; }
+
+    /* ── NOTES BOX ── */
+    .notes-box { background: var(--yellow-bg); border: 1.5px solid var(--yellow-border); border-radius: var(--r); padding: 20px 24px; margin-bottom: 28px; }
+    .notes-head { display: flex; align-items: center; gap: 9px; margin-bottom: 12px; }
+    .notes-head-text { font-family: 'Montserrat', sans-serif; font-weight: 800; font-size: 0.82rem; color: var(--orange-dark); text-transform: uppercase; letter-spacing: 0.08em; }
+    .notes-list { list-style: none; }
+    .notes-list li { display: flex; gap: 9px; padding: 5px 0; font-size: 0.83rem; line-height: 1.55; color: #5a4a2a; }
+
+    /* FOOTER */
+    footer { background: var(--blue-dark); padding: 24px 28px; text-align: center; }
+    .footer-logo { font-family: 'Montserrat', sans-serif; font-weight: 900; font-size: 1rem; color: white; letter-spacing: 0.04em; }
+    .footer-logo span { color: var(--orange); }
+    .footer-sub { font-size: 0.72rem; color: rgba(255,255,255,0.38); margin-top: 5px; }
+
+    /* RESPONSIVE */
+    @media (max-width: 780px) {
+      .channel-grid { grid-template-columns: 1fr; }
+      .flow-grid { grid-template-columns: 1fr; }
+      .flow-step { border-radius: 0; border-right: 1px solid var(--gray); border-bottom: none; }
+      .flow-step:first-child { border-radius: var(--r) var(--r) 0 0; }
+      .flow-step:last-child { border-radius: 0 0 var(--r) var(--r); }
+      .flow-arrow { display: none !important; }
+      .cycle-grid { grid-template-columns: 1fr 1fr; }
+      .docs-flow { flex-direction: column; }
+      .doc-arrow { transform: rotate(90deg); }
+      .tab-nav { display: none; }
+      .header-inner { padding: 12px 14px; }
+      main { padding: 20px 14px 52px; }
+      .hero { padding: 18px 14px; }
+      .hero-title { font-size: 1.1rem; }
+      .sop-pill { display: none; }
+    }
+    @media (max-width: 480px) {
+      .cycle-grid { grid-template-columns: 1fr; }
+    }
+
+    /* Mobile tab selector */
+    .mobile-section-select { display: none; width: 100%; margin-bottom: 20px; padding: 10px 14px; border-radius: var(--r); border: 1.5px solid var(--gray); font-family: 'Montserrat', sans-serif; font-weight: 600; font-size: 0.85rem; background: white; color: var(--dark); cursor: pointer; }
+    @media (max-width: 780px) { .mobile-section-select { display: block; } }
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="header-inner">
+    <div class="brand">
+      <div class="brand-logo">
+        <svg viewBox="0 0 28 28" fill="none"><circle cx="14" cy="14" r="6" fill="white"/><line x1="14" y1="2" x2="14" y2="6" stroke="white" stroke-width="2.2" stroke-linecap="round"/><line x1="14" y1="22" x2="14" y2="26" stroke="white" stroke-width="2.2" stroke-linecap="round"/><line x1="2" y1="14" x2="6" y2="14" stroke="white" stroke-width="2.2" stroke-linecap="round"/><line x1="22" y1="14" x2="26" y2="14" stroke="white" stroke-width="2.2" stroke-linecap="round"/><line x1="5.5" y1="5.5" x2="8.4" y2="8.4" stroke="white" stroke-width="2.2" stroke-linecap="round"/><line x1="19.6" y1="19.6" x2="22.5" y2="22.5" stroke="white" stroke-width="2.2" stroke-linecap="round"/><line x1="22.5" y1="5.5" x2="19.6" y2="8.4" stroke="white" stroke-width="2.2" stroke-linecap="round"/><line x1="8.4" y1="19.6" x2="5.5" y2="22.5" stroke="white" stroke-width="2.2" stroke-linecap="round"/></svg>
+      </div>
+      <div>
+        <div class="brand-name">WINDMAR HOME</div>
+        <div class="brand-sub">Service Operations</div>
+      </div>
+    </div>
+    <div class="header-right">
+      <nav class="tab-nav">
+        <button class="tab-btn active" onclick="switchTab('lead')" id="tab-lead" data-en="Lead Process" data-es="Proceso de Lead">Lead Process</button>
+        <button class="tab-btn" onclick="switchTab('services')" id="tab-services" data-en="Service Types" data-es="Tipos de Servicio">Service Types</button>
+        <button class="tab-btn" onclick="switchTab('post')" id="tab-post" data-en="Post-Sale" data-es="Post-Venta">Post-Sale</button>
+        <button class="tab-btn" onclick="switchTab('docs')" id="tab-docs" data-en="Documents" data-es="Documentos">Documents</button>
+        <button class="tab-btn" onclick="switchTab('spiff')" id="tab-spiff" data-en="Commissions" data-es="Comisiones">Commissions</button>
+      </nav>
+      <div class="lang-toggle">
+        <button class="lang-btn active" id="btnEN" onclick="setLang('en')">EN</button>
+        <button class="lang-btn" id="btnES" onclick="setLang('es')">ES</button>
+      </div>
+    </div>
+  </div>
+</header>
+
+<div class="hero">
+  <div class="hero-inner">
+    <div class="hero-icon">
+      <svg width="28" height="28" viewBox="0 0 28 28" fill="none"><rect x="3" y="5" width="22" height="18" rx="3" stroke="white" stroke-width="1.9"/><path d="M3 11h22" stroke="white" stroke-width="1.9"/><path d="M9 8V5M19 8V5" stroke="white" stroke-width="1.9" stroke-linecap="round"/><path d="M8 17h5M8 21h9" stroke="white" stroke-width="1.9" stroke-linecap="round"/></svg>
+    </div>
+    <div class="hero-text">
+      <div class="hero-title" id="hero-title">Service to Non-Windmar Customers — Standard Operating Procedure</div>
+      <div class="hero-sub" id="hero-sub">Guidelines for servicing solar systems not originally installed by Windmar Home</div>
+    </div>
+    <div class="sop-pill" id="sop-pill">SOP Document</div>
+  </div>
+</div>
+
+<main>
+
+  <!-- Mobile section select -->
+  <select class="mobile-section-select" onchange="switchTab(this.value)" id="mobileSelect">
+    <option value="lead" data-en="Lead Process" data-es="Proceso de Lead">Lead Process</option>
+    <option value="services" data-en="Service Types" data-es="Tipos de Servicio">Service Types</option>
+    <option value="post" data-en="Post-Sale Process" data-es="Proceso Post-Venta">Post-Sale Process</option>
+    <option value="docs" data-en="Required Documents" data-es="Documentos Requeridos">Required Documents</option>
+    <option value="spiff" data-en="Commissions & Spiffs" data-es="Comisiones & Spiffs">Commissions & Spiffs</option>
+  </select>
+
+  <!-- ════════════════════════════ TAB 1: LEAD PROCESS ════════════════════════════ -->
+  <div class="tab-pane active" id="pane-lead">
+
+    <div class="intro-box" id="lead-intro">
+      This SOP governs all service lead handling for customers whose solar and/or battery systems were <strong>not originally installed by Windmar Home</strong>. Follow the channel-specific entry procedure, then route through SAP for lead creation and closer assignment.
+    </div>
+
+    <div class="sec-label" id="label-channels">Lead Inquiry Channels / Canales de Entrada de Lead</div>
+    <div class="channel-grid">
+      <!-- Tesla Page -->
+      <div class="channel-card">
+        <div class="channel-card-head">
+          <div class="channel-icon">
+            <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><circle cx="10" cy="10" r="8" stroke="white" stroke-width="1.8"/><path d="M7 8h6M9 8v5" stroke="white" stroke-width="1.8" stroke-linecap="round"/></svg>
+          </div>
+          <div class="channel-title" data-en="Tesla Page" data-es="Tesla Page">Tesla Page</div>
+        </div>
+        <div class="channel-body">
+          <ul>
+            <li data-en="Customer inquires themselves via the Tesla Page" data-es="El cliente hace la consulta por sí mismo a través de la Tesla Page">Customer inquires themselves via the Tesla Page</li>
+            <li>Email: <strong>sap@windmarhome.com</strong></li>
+            <li data-en="Customer contact info and service request may not be included" data-es="La información del cliente y solicitud de servicio pueden no estar incluidas">Customer contact info and service request may not be included</li>
+            <li data-en="We must respond to their emails immediately" data-es="Debemos responder a sus correos de forma inmediata">We must respond to their emails immediately</li>
+          </ul>
+        </div>
+      </div>
+      <!-- Rep Generated -->
+      <div class="channel-card">
+        <div class="channel-card-head">
+          <div class="channel-icon">
+            <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><circle cx="10" cy="7" r="4" stroke="white" stroke-width="1.8"/><path d="M3 18c0-3.866 3.134-7 7-7s7 3.134 7 7" stroke="white" stroke-width="1.8" stroke-linecap="round"/></svg>
+          </div>
+          <div class="channel-title" data-en="Rep Generated" data-es="Generado por Rep">Rep Generated</div>
+        </div>
+        <div class="channel-body">
+          <ul>
+            <li data-en="Sales Rep creates the lead and marks product as 'Service'" data-es="El Rep de Ventas crea el lead y marca el producto como 'Servicio'">Sales Rep creates the lead and marks product as "Service"</li>
+            <li data-en="Sales Rep sends request to SAP to create and book the customer" data-es="El Rep envía solicitud a SAP para crear y reservar al cliente">Sales Rep sends request to SAP to create and book the customer</li>
+          </ul>
+        </div>
+      </div>
+      <!-- Customer Call-In -->
+      <div class="channel-card">
+        <div class="channel-card-head">
+          <div class="channel-icon">
+            <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M6 3h8M10 3v2M7 5h6l1 3-2 1a10 10 0 004 4l1-2 3 1v6a2 2 0 01-2 2C7 20 0 13 0 5a2 2 0 012-2h4z" stroke="white" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </div>
+          <div class="channel-title" data-en="Customer Call-In (Inbound)" data-es="Llamada del Cliente (Inbound)">Customer Call-In (Inbound)</div>
+        </div>
+        <div class="channel-body">
+          <ul>
+            <li data-en="Customer calls in to inquire for service" data-es="El cliente llama para consultar sobre servicio">Customer calls in to inquire for service</li>
+            <li data-en="Customer will be transferred to SAP" data-es="El cliente será transferido a SAP">Customer will be transferred to SAP</li>
+            <li data-en="SAP will create lead in Zoho and follow SOP process for lead creation & assignment" data-es="SAP creará el lead en Zoho y seguirá el proceso SOP para creación y asignación de leads">SAP will create lead in Zoho and follow SOP process for lead creation &amp; assignment</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="sec-label" id="label-process">Lead Entry & Assignment Process / Proceso de Entrada y Asignación del Lead</div>
+    <div class="flow-grid">
+      <!-- Step 1 -->
+      <div class="flow-step">
+        <div class="flow-step-num">1</div>
+        <div class="flow-title" data-en="Lead Entry" data-es="Entrada del Lead">Lead Entry</div>
+        <ul class="flow-list">
+          <li data-en="Customer Call-In (Inbound)" data-es="Llamada del Cliente (Inbound)">Customer Call-In (Inbound)</li>
+          <li data-en="Sales Rep Entered" data-es="Ingresado por Rep de Ventas">Sales Rep Entered</li>
+          <li data-en="Sales Rep Requests Lead Entry" data-es="Rep solicita entrada del lead">Sales Rep Requests Lead Entry</li>
+        </ul>
+        <div class="flow-arrow"><svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M3 6h6M7 4l2 2-2 2" stroke="#f7941d" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+      </div>
+      <!-- Step 2 -->
+      <div class="flow-step">
+        <div class="flow-step-num">2</div>
+        <div class="flow-title" data-en="SAP Collects Customer Info" data-es="SAP Recopila Info del Cliente">SAP Collects Customer Info</div>
+        <ul class="flow-list">
+          <li data-en="Contacts customer to confirm contact information" data-es="Contacta al cliente para confirmar información">Contacts customer to confirm contact information</li>
+          <li data-en="Confirms service inquired" data-es="Confirma el servicio consultado">Confirms service inquired</li>
+          <li data-en="Marks service type in Zoho lead manually (until Command is accessible)" data-es="Marca el tipo de servicio en el lead de Zoho manualmente (hasta que Command esté disponible)">Marks service type in Zoho manually until Command is accessible</li>
+          <li data-en="Creates proposal in Command (when accessible) or manually in Zoho" data-es="Crea propuesta en Command o manualmente en Zoho">Creates proposal in Command or manually in Zoho</li>
+        </ul>
+        <div class="flow-arrow"><svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M3 6h6M7 4l2 2-2 2" stroke="#f7941d" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+      </div>
+      <!-- Step 3 -->
+      <div class="flow-step">
+        <div class="flow-step-num orange">3</div>
+        <div class="flow-title" data-en="SAP Assigns Closer" data-es="SAP Asigna Closer">SAP Assigns Closer</div>
+        <ul class="flow-list">
+          <li data-en="Verifies Closer Distribution and assigns in Rotation" data-es="Verifica distribución del Closer y asigna en rotación">Verifies Closer Distribution — assigns in Rotation</li>
+        </ul>
+        <ul class="closer-list">
+          <li>Ilham Safazada</li>
+          <li>Abdiel Mendez</li>
+          <li>Aby Gonzalez</li>
+          <li>Juan Sebastian Munoz</li>
+        </ul>
+        <ul class="flow-list" style="margin-top:8px">
+          <li data-en="SAP provides property appraiser details from County and alerts Rep of lead source and product" data-es="SAP provee detalles del tasador de propiedad del condado y alerta al Rep sobre el origen del lead y producto">SAP provides County property appraiser details; alerts Rep of lead source &amp; product</li>
+        </ul>
+        <div class="flow-arrow"><svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M3 6h6M7 4l2 2-2 2" stroke="#f7941d" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+      </div>
+      <!-- Step 4 -->
+      <div class="flow-step">
+        <div class="flow-step-num orange">4</div>
+        <div class="flow-title" data-en="Dispositions" data-es="Disposiciones">Dispositions</div>
+        <ul class="flow-list">
+          <li data-en="Subcategory will be accessible for these Service Leads" data-es="La subcategoría estará disponible para estos leads de servicio">Subcategory will be accessible for Service Leads</li>
+          <li data-en="In the meantime: update dispositions as standard and notate next steps in lead notes" data-es="Por ahora: actualizar disposiciones como estándar y anotar próximos pasos en notas del lead">In the meantime: update dispositions as standard; notate next steps in lead notes</li>
+          <li data-en="Service tech assigned after the SALE is completed; will update service ticket" data-es="Técnico asignado después de cerrar la venta; actualizará el ticket de servicio">Service tech assigned after SALE is completed; will update service ticket</li>
+          <li data-en="Must report back to rep once service is completed" data-es="Debe reportar al rep una vez completado el servicio">Must report back to rep once service is completed</li>
+        </ul>
+      </div>
+    </div>
+
+  </div><!-- /pane-lead -->
+
+
+  <!-- ════════════════════════════ TAB 2: SERVICE TYPES ════════════════════════════ -->
+  <div class="tab-pane" id="pane-services">
+
+    <div class="intro-box" id="svc-intro">
+      All services below are available to non-Windmar customers at published rates. Review included scope and warranty terms carefully with the customer before scheduling.
+    </div>
+
+    <div class="sec-label" id="label-svc">Available Services / Servicios Disponibles</div>
+    <div class="service-grid">
+
+      <!-- EV Charger Installation -->
+      <div class="service-card">
+        <div class="card-head">
+          <div class="card-icon"><svg width="20" height="20" viewBox="0 0 20 20" fill="none"><rect x="4" y="3" width="12" height="14" rx="2" stroke="white" stroke-width="1.8"/><path d="M8 10h4M10 8v4" stroke="white" stroke-width="1.7" stroke-linecap="round"/><path d="M7 17v2M13 17v2" stroke="white" stroke-width="1.6" stroke-linecap="round"/></svg></div>
+          <div><div class="card-title" data-en="EV Charger Installation" data-es="Instalación de Cargador EV">EV Charger Installation</div><div class="card-title-sub" data-en="Instalación de Cargador EV" data-es="EV Charger Installation">Instalación de Cargador EV</div></div>
+        </div>
+        <div class="card-body">
+          <ul class="included-list">
+            <li><span class="bdot"></span><span data-en="Furnish and install Level 2 Tesla Wall Connector" data-es="Suministro e instalación de Tesla Wall Connector Nivel 2">Furnish and install Level 2 Tesla Wall Connector</span></li>
+            <li><span class="bdot"></span><span data-en="Conduit and wiring up to 50 ft (from charger to Panelboard/Gateway)" data-es="Conduit y cableado hasta 50 pies (desde el cargador hasta el tablero/gateway)">Conduit and wiring up to 50 ft (charger to Panelboard/Gateway)</span></li>
+            <li><span class="bdot"></span><span data-en="Programming and set-up" data-es="Programación y configuración">Programming and set-up</span></li>
+            <li><span class="bdot"></span><span data-en="In-person customer training (same day of installation)" data-es="Capacitación presencial al cliente (mismo día de instalación)">In-person customer training (same day)</span></li>
+            <li><span class="bdot g"></span><span><em data-en="Professional Service Report" data-es="Informe de Servicio Profesional">Professional Service Report</em></span></li>
+          </ul>
+          <div class="warranty yes"><svg width="13" height="13" viewBox="0 0 13 13" fill="none"><circle cx="6.5" cy="6.5" r="5.5" stroke="#2a7a4a" stroke-width="1.4"/><path d="M4 6.5l1.5 1.5 3-3" stroke="#2a7a4a" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg><span data-en="WORKMANSHIP WARRANTY: 1 YEAR" data-es="GARANTÍA DE MANO DE OBRA: 1 AÑO">WORKMANSHIP WARRANTY: 1 YEAR</span></div>
+        </div>
+      </div>
+
+      <!-- PV System Removal -->
+      <div class="service-card">
+        <div class="card-head">
+          <div class="card-icon"><svg width="20" height="20" viewBox="0 0 20 20" fill="none"><rect x="3" y="5" width="14" height="9" rx="1.5" stroke="white" stroke-width="1.8"/><path d="M7 14v3M13 14v3M5 17h10" stroke="white" stroke-width="1.5" stroke-linecap="round"/><path d="M7 8.5h6M7 11h3" stroke="white" stroke-width="1.4" stroke-linecap="round"/></svg></div>
+          <div><div class="card-title" data-en="PV System Removal" data-es="Remoción de Sistema FV">PV System Removal</div><div class="card-title-sub" data-en="Remoción de Sistema FV" data-es="PV System Removal">Remoción de Sistema FV</div></div>
+        </div>
+        <div class="card-body">
+          <ul class="included-list">
+            <li><span class="bdot"></span><span data-en="Remove system components: modules, rails, conduit, wires" data-es="Remoción de componentes: módulos, rieles, conduit, cableado">Remove system components: modules, rails, conduit, wires</span></li>
+            <li><span class="bdot"></span><span data-en="System attachments (penetrations) will remain unless customer has arranged for sealing" data-es="Los anclajes (penetraciones) permanecerán a menos que el cliente haya coordinado su sellado">System attachments (penetrations) remain unless customer arranged sealing</span></li>
+            <li><span class="bdot"></span><span data-en="Material organized on site in coordination with the customer" data-es="Material organizado en sitio conforme a coordinación con el cliente">Material organized on site in coordination with customer</span></li>
+            <li><span class="bdot g"></span><span><em data-en="Professional Service Report" data-es="Informe de Servicio Profesional">Professional Service Report</em></span></li>
+          </ul>
+          <div class="warranty"><svg width="13" height="13" viewBox="0 0 13 13" fill="none"><circle cx="6.5" cy="6.5" r="5.5" stroke="#b0bac8" stroke-width="1.4"/><path d="M4 6.5l1.5 1.5 3-3" stroke="#b0bac8" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg><span data-en="NO WORKMANSHIP WARRANTY" data-es="SIN GARANTÍA DE MANO DE OBRA">NO WORKMANSHIP WARRANTY</span></div>
+        </div>
+      </div>
+
+      <!-- PV System Re-installation -->
+      <div class="service-card">
+        <div class="card-head">
+          <div class="card-icon"><svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M4 15l6-9 6 9H4z" stroke="white" stroke-width="1.8" stroke-linejoin="round"/><path d="M10 6V3M6 3h8" stroke="white" stroke-width="1.5" stroke-linecap="round"/></svg></div>
+          <div><div class="card-title" data-en="PV System Re-installation" data-es="Reinstalación de Sistema FV">PV System Re-installation</div><div class="card-title-sub" data-en="Reinstalación de Sistema FV" data-es="PV System Re-installation">Reinstalación de Sistema FV</div></div>
+        </div>
+        <div class="card-body">
+          <ul class="included-list">
+            <li><span class="bdot"></span><span data-en="Re-installation of existing solar system components: modules, rails, conduit, wires" data-es="Reinstalación de componentes del sistema solar existente: módulos, rieles, conduit, cableado">Re-installation of existing solar components: modules, rails, conduit, wires</span></li>
+            <li><span class="bdot"></span><span data-en="Same original system layout will be maintained" data-es="Se mantiene el diseño original del sistema">Same original system layout will be maintained</span></li>
+            <li><span class="bdot"></span><span data-en="Complete system connections (AC/DC)" data-es="Conexiones completas del sistema (AC/DC)">Complete system connections (AC/DC)</span></li>
+            <li><span class="bdot"></span><span data-en="System commissioning and start-up" data-es="Puesta en servicio e inicio del sistema">System commissioning and start-up</span></li>
+            <li><span class="bdot"></span><span data-en="Monitoring app set-up and in-person customer training (same day)" data-es="Configuración de app de monitoreo y capacitación presencial (mismo día)">Monitoring app set-up and in-person training (same day)</span></li>
+            <li><span class="bdot g"></span><span><em data-en="Professional Service Report" data-es="Informe de Servicio Profesional">Professional Service Report</em></span></li>
+          </ul>
+          <div class="warranty yellow"><svg width="13" height="13" viewBox="0 0 13 13" fill="none"><circle cx="6.5" cy="6.5" r="5.5" stroke="#b07800" stroke-width="1.4"/><path d="M4 6.5l1.5 1.5 3-3" stroke="#b07800" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg><span data-en="WORKMANSHIP WARRANTY: 30 DAYS" data-es="GARANTÍA DE MANO DE OBRA: 30 DÍAS">WORKMANSHIP WARRANTY: 30 DAYS</span></div>
+        </div>
+      </div>
+
+      <!-- Design / Permit / Inspection -->
+      <div class="service-card">
+        <div class="card-head">
+          <div class="card-icon"><svg width="20" height="20" viewBox="0 0 20 20" fill="none"><rect x="4" y="3" width="12" height="15" rx="2" stroke="white" stroke-width="1.8"/><path d="M7 8h6M7 11h6M7 14h4" stroke="white" stroke-width="1.5" stroke-linecap="round"/></svg></div>
+          <div><div class="card-title" data-en="Design / Permit / Inspection" data-es="Diseño / Permiso / Inspección">Design / Permit / Inspection</div><div class="card-title-sub" data-en="Diseño / Permiso / Inspección" data-es="Design / Permit / Inspection">Diseño / Permiso / Inspección</div></div>
+        </div>
+        <div class="card-body">
+          <ul class="included-list">
+            <li><span class="bdot"></span><span data-en="Full system engineering design" data-es="Diseño de ingeniería completo del sistema">Full system engineering design</span></li>
+            <li><span class="bdot"></span><span data-en="Permit application submission" data-es="Sometimiento de solicitud de permiso">Permit application submission</span></li>
+            <li><span class="bdot"></span><span data-en="Processing, coordinate and perform system inspection" data-es="Tramitación, coordinación y realización de la inspección del sistema">Processing, coordinate and perform system inspection</span></li>
+            <li><span class="bdot g"></span><span data-en="Changes required due to AHJ requests will be evaluated separately; additional charges may apply" data-es="Cambios requeridos por la AHJ se evaluarán por separado; pueden aplicar cargos adicionales"><em>AHJ-required changes evaluated separately; additional charges may apply</em></span></li>
+          </ul>
+          <div class="warranty"><svg width="13" height="13" viewBox="0 0 13 13" fill="none"><circle cx="6.5" cy="6.5" r="5.5" stroke="#b0bac8" stroke-width="1.4"/><path d="M4 6.5l1.5 1.5 3-3" stroke="#b0bac8" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg><span data-en="NO WORKMANSHIP WARRANTY" data-es="SIN GARANTÍA DE MANO DE OBRA">NO WORKMANSHIP WARRANTY</span></div>
+        </div>
+      </div>
+
+      <!-- Module Cleaning -->
+      <div class="service-card">
+        <div class="card-head">
+          <div class="card-icon"><svg width="20" height="20" viewBox="0 0 20 20" fill="none"><circle cx="10" cy="10" r="7" stroke="white" stroke-width="1.8"/><path d="M7 10c0-1.657 1.343-3 3-3s3 1.343 3 3" stroke="white" stroke-width="1.6" stroke-linecap="round"/><path d="M10 13v1" stroke="white" stroke-width="1.8" stroke-linecap="round"/></svg></div>
+          <div><div class="card-title" data-en="Module Cleaning" data-es="Limpieza de Módulos">Module Cleaning</div><div class="card-title-sub" data-en="Limpieza de Módulos" data-es="Module Cleaning">Limpieza de Módulos</div></div>
+        </div>
+        <div class="card-body">
+          <ul class="included-list">
+            <li><span class="bdot"></span><span data-en="Professional solar module cleaning" data-es="Limpieza profesional de módulos solares">Professional solar module cleaning</span></li>
+            <li><span class="bdot g"></span><span><em data-en="Professional Service Report" data-es="Informe de Servicio Profesional">Professional Service Report</em></span></li>
+          </ul>
+          <div class="warranty"><svg width="13" height="13" viewBox="0 0 13 13" fill="none"><circle cx="6.5" cy="6.5" r="5.5" stroke="#b0bac8" stroke-width="1.4"/><path d="M4 6.5l1.5 1.5 3-3" stroke="#b0bac8" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg><span data-en="NO WORKMANSHIP WARRANTY" data-es="SIN GARANTÍA DE MANO DE OBRA">NO WORKMANSHIP WARRANTY</span></div>
+        </div>
+      </div>
+
+      <!-- MSP Upgrade -->
+      <div class="service-card">
+        <div class="card-head">
+          <div class="card-icon"><svg width="20" height="20" viewBox="0 0 20 20" fill="none"><rect x="3" y="5" width="14" height="10" rx="1.5" stroke="white" stroke-width="1.8"/><path d="M7 5V3h6v2" stroke="white" stroke-width="1.5" stroke-linecap="round"/><path d="M10 9v4M8 11h4" stroke="white" stroke-width="1.6" stroke-linecap="round"/></svg></div>
+          <div><div class="card-title" data-en="Main Service Panel (MSP) Upgrade" data-es="Actualización de Panel Principal (MSP)">Main Service Panel (MSP) Upgrade</div><div class="card-title-sub" data-en="Actualización de Panel Principal" data-es="MSP Upgrade">Actualización de Panel Principal</div></div>
+        </div>
+        <div class="card-body">
+          <ul class="included-list">
+            <li><span class="bdot"></span><span data-en="Site Survey (Pre-Inspection Visit)" data-es="Visita de inspección preliminar (Site Survey)">Site Survey (Pre-Inspection Visit)</span></li>
+            <li><span class="bdot"></span><span data-en="Engineering Design" data-es="Diseño de ingeniería">Engineering Design</span></li>
+            <li><span class="bdot"></span><span data-en="Permit application submission" data-es="Sometimiento de solicitud de permiso">Permit application submission</span></li>
+            <li><span class="bdot"></span><span data-en="Processing, coordinate and perform system inspection" data-es="Tramitación, coordinación y realización de la inspección">Processing, coordinate and perform system inspection</span></li>
+            <li><span class="bdot"></span><span data-en="Processing and coordinate with the Utility Company for disconnect and reconnect" data-es="Gestión y coordinación con la compañía eléctrica (desconexión y reconexión)">Coordinate with Utility Company for disconnect &amp; reconnect</span></li>
+            <li><span class="bdot"></span><span data-en="Furnish and install new Main Service Panel (1 ea) — installed outdoor" data-es="Suministro e instalación de nuevo Panel Principal (1 unidad) — instalado en exterior">Furnish and install new MSP (1 ea) — outdoor installation</span></li>
+            <li><span class="bdot"></span><span data-en="Install conduit and wire from meter base to Main Service Panel" data-es="Instalación de conduit y cableado desde la base del medidor al panel">Install conduit and wire from meter base to MSP</span></li>
+            <li><span class="bdot g"></span><span><em data-en="Not included: interior panelboard replacement, adding circuit loads, or fixing existing circuits" data-es="No incluye: reemplazo de tableros interiores, adición de cargas de circuito ni corrección de circuitos existentes">Not included: interior panelboard replacement, circuit loads, or fixing existing circuits</em></span></li>
+          </ul>
+          <div class="warranty yes"><svg width="13" height="13" viewBox="0 0 13 13" fill="none"><circle cx="6.5" cy="6.5" r="5.5" stroke="#2a7a4a" stroke-width="1.4"/><path d="M4 6.5l1.5 1.5 3-3" stroke="#2a7a4a" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg><span data-en="WORKMANSHIP WARRANTY: 1 YEAR" data-es="GARANTÍA DE MANO DE OBRA: 1 AÑO">WORKMANSHIP WARRANTY: 1 YEAR</span></div>
+        </div>
+      </div>
+
+      <!-- System Troubleshooting / Diagnostics -->
+      <div class="service-card">
+        <div class="card-head">
+          <div class="card-icon"><svg width="20" height="20" viewBox="0 0 20 20" fill="none"><circle cx="9" cy="9" r="6" stroke="white" stroke-width="1.8"/><path d="M13.5 13.5l3 3" stroke="white" stroke-width="2" stroke-linecap="round"/></svg></div>
+          <div><div class="card-title" data-en="System Troubleshooting / Diagnostics" data-es="Diagnóstico y Solución de Averías">System Troubleshooting / Diagnostics</div><div class="card-title-sub" data-en="Diagnóstico y Solución de Averías" data-es="System Troubleshooting">Diagnóstico y Solución de Averías</div></div>
+        </div>
+        <div class="card-body">
+          <ul class="included-list">
+            <li><span class="bdot"></span><span data-en="Service Visit (1 ea.)" data-es="Visita de servicio (1 visita)">Service Visit (1 ea.)</span></li>
+            <li><span class="bdot"></span><span data-en="System evaluation, diagnostic and verification of all electrical connections" data-es="Evaluación, diagnóstico y verificación de conexiones eléctricas del sistema">System evaluation, diagnostic &amp; verification of all electrical connections</span></li>
+            <li><span class="bdot"></span><span data-en="Replace damaged solar system fuses and/or breakers" data-es="Reemplazo de fusibles y/o breakers dañados del sistema solar">Replace damaged solar system fuses and/or breakers</span></li>
+            <li><span class="bdot"></span><span data-en="Restore system communication (Internet connection)" data-es="Restauración de comunicación del sistema (conexión a internet)">Restore system communication (Internet connection)</span></li>
+            <li><span class="bdot"></span><span data-en="Set-up monitoring app with the customer" data-es="Configuración de app de monitoreo con el cliente">Set-up monitoring app with the customer</span></li>
+            <li><span class="bdot"></span><span data-en="Technical support assistance with equipment/component manufacturers" data-es="Asistencia de soporte técnico con fabricantes de equipos/componentes">Technical support assistance with equipment/component manufacturers</span></li>
+            <li><span class="bdot"></span><span data-en="Handling warranty claims for defective equipment with manufacturers (RMA process)" data-es="Gestión de reclamaciones de garantía por equipos defectuosos con fabricantes (proceso RMA)">Handling warranty claims with manufacturers (RMA process)</span></li>
+            <li><span class="bdot g"></span><span><em data-en="Not included: equipment replacement due to defects/warranty claims, damaged conduit and wires, roofing work, seal penetrations, remove/reinstall systems or equipment, additional site visits" data-es="No incluye: reemplazo de equipos por defectos/reclamaciones, conduit y cableado dañado, trabajos de techado, sellado de penetraciones, remoción/reinstalación de sistemas o equipos, visitas adicionales">Not included: equipment replacement/warranty claims, damaged conduit/wires, roofing, seal penetrations, remove/reinstall systems, additional visits</em></span></li>
+          </ul>
+          <div class="warranty yellow"><svg width="13" height="13" viewBox="0 0 13 13" fill="none"><circle cx="6.5" cy="6.5" r="5.5" stroke="#b07800" stroke-width="1.4"/><path d="M4 6.5l1.5 1.5 3-3" stroke="#b07800" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg><span data-en="WARRANTY: 30 DAYS (WITHIN SCOPE PERFORMED ONLY)" data-es="GARANTÍA: 30 DÍAS (SOLO DENTRO DEL ALCANCE REALIZADO)">WARRANTY: 30 DAYS (WITHIN SCOPE PERFORMED ONLY)</span></div>
+          <div style="font-size:0.72rem;color:var(--gray-text);margin-top:8px;font-style:italic;" data-en="Florida residential services only. Equipment subject to manufacturer warranty." data-es="Solo para uso residencial en Florida. Los equipos están sujetos a la garantía del fabricante.">Florida residential services only. Equipment subject to manufacturer warranty.</div>
+        </div>
+      </div>
+
+    </div><!-- /service-grid -->
+
+    <div class="notes-box">
+      <div class="notes-head">
+        <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><circle cx="9" cy="9" r="7.5" stroke="#f7941d" stroke-width="1.7"/><path d="M9 5.5v5" stroke="#f7941d" stroke-width="2" stroke-linecap="round"/><circle cx="9" cy="13" r="1" fill="#f7941d"/></svg>
+        <div class="notes-head-text" id="notes-title">Important Notes / Notas Importantes</div>
+      </div>
+      <ul class="notes-list">
+        <li><svg width="14" height="14" viewBox="0 0 14 14" fill="none" style="flex-shrink:0;margin-top:2px"><circle cx="7" cy="7" r="6" stroke="#c8921a" stroke-width="1.3"/><path d="M4.5 7.5L6 9l3.5-4" stroke="#c8921a" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg><span data-en="Windmar Home does not warranty equipment or workmanship of third-party installers." data-es="Windmar Home no garantiza equipos ni mano de obra de instaladores terceros.">Windmar Home does not warranty equipment or workmanship of third-party installers.</span></li>
+        <li><svg width="14" height="14" viewBox="0 0 14 14" fill="none" style="flex-shrink:0;margin-top:2px"><circle cx="7" cy="7" r="6" stroke="#c8921a" stroke-width="1.3"/><path d="M4.5 7.5L6 9l3.5-4" stroke="#c8921a" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg><span data-en="All services require a signed work order and payment agreement prior to scheduling." data-es="Todos los servicios requieren una orden de trabajo firmada y acuerdo de pago antes de programar.">All services require a signed work order and payment agreement prior to scheduling.</span></li>
+        <li><svg width="14" height="14" viewBox="0 0 14 14" fill="none" style="flex-shrink:0;margin-top:2px"><circle cx="7" cy="7" r="6" stroke="#c8921a" stroke-width="1.3"/><path d="M4.5 7.5L6 9l3.5-4" stroke="#c8921a" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg><span data-en="Roof penetration sealing is NOT included in removal services — customer must coordinate separately." data-es="El sellado de penetraciones en el techo NO está incluido en los servicios de remoción — el cliente debe coordinarlo por separado.">Roof penetration sealing is NOT included in removal services — customer must coordinate separately.</span></li>
+        <li><svg width="14" height="14" viewBox="0 0 14 14" fill="none" style="flex-shrink:0;margin-top:2px"><circle cx="7" cy="7" r="6" stroke="#c8921a" stroke-width="1.3"/><path d="M4.5 7.5L6 9l3.5-4" stroke="#c8921a" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg><span data-en="Technician may decline work if safety hazards or equipment condition prevents safe completion." data-es="El técnico puede negarse a realizar el trabajo si existen riesgos de seguridad o el estado del equipo impide una finalización segura.">Technician may decline work if safety hazards or equipment condition prevents safe completion.</span></li>
+      </ul>
+    </div>
+
+  </div><!-- /pane-services -->
+
+
+  <!-- ════════════════════════════ TAB 3: POST-SALE ════════════════════════════ -->
+  <div class="tab-pane" id="pane-post">
+    <div class="intro-box" id="post-intro">
+      Once a service lead is marked <strong>SOLD</strong>, the following cycle is initiated. NTP reviews the account, a service tech is scheduled, and the lead is closed in the pipeline upon job completion.
+    </div>
+    <div class="sec-label" id="label-post">Post-Sale Service Cycle / Ciclo de Servicio Post-Venta</div>
+    <div class="cycle-section">
+      <div class="cycle-grid">
+        <div class="cycle-step">
+          <div class="cycle-num">01</div>
+          <div class="cycle-title" data-en="Service Lead — SOLD" data-es="Lead de Servicio — VENDIDO">Service Lead — SOLD</div>
+          <div class="cycle-desc" data-en="Closer marks the lead as SOLD in Zoho. Sale is recorded against the rep's account." data-es="El Closer marca el lead como VENDIDO en Zoho. La venta se registra contra la cuenta del rep.">Closer marks the lead as SOLD in Zoho. Sale is recorded against the rep's account.</div>
+        </div>
+        <div class="cycle-step">
+          <div class="cycle-num">02</div>
+          <div class="cycle-title" data-en="Lead Converted by Accounting" data-es="Lead Convertido por Contabilidad">Lead Converted by Accounting</div>
+          <div class="cycle-desc" data-en="Accounting team converts the lead and processes the payment collection confirmation." data-es="El equipo de contabilidad convierte el lead y procesa la confirmación de cobro.">Accounting team converts the lead and processes payment collection confirmation.</div>
+        </div>
+        <div class="cycle-step">
+          <div class="cycle-num">03</div>
+          <div class="cycle-title" data-en="Enters NEW Service Pipeline" data-es="Entra al Nuevo Pipeline de Servicio">Enters NEW Service Pipeline</div>
+          <div class="cycle-desc" data-en="The converted lead enters the dedicated Service Pipeline for scheduling and tracking." data-es="El lead convertido entra al Pipeline de Servicio dedicado para programación y seguimiento.">The converted lead enters the dedicated Service Pipeline for scheduling and tracking.</div>
+        </div>
+        <div class="cycle-step orange-accent">
+          <div class="cycle-num">04</div>
+          <div class="cycle-title" data-en="NTP Reviews Smartsheet & Docs" data-es="NTP Revisa Smartsheet y Documentos">NTP Reviews Smartsheet &amp; Docs</div>
+          <div class="cycle-desc" data-en="NTP verifies the Smartsheet and all required documents. Confirms payment was collected by Sales Rep before proceeding." data-es="NTP verifica el Smartsheet y todos los documentos requeridos. Confirma que el pago fue recopilado por el Rep antes de continuar.">NTP verifies Smartsheet and required documents. <strong>Confirms payment was collected by Sales Rep</strong> before proceeding.</div>
+        </div>
+        <div class="cycle-step orange-accent">
+          <div class="cycle-num">05</div>
+          <div class="cycle-title" data-en="Service Tech is Scheduled" data-es="Técnico de Servicio es Programado">Service Tech is Scheduled <em style="font-size:0.72rem;color:var(--orange)">*BY WHO???*</em></div>
+          <div class="cycle-desc" data-en="Service technician is assigned and scheduled for the on-site visit. Assignment owner TBD — pending process clarification." data-es="El técnico de servicio es asignado y programado para la visita en sitio. Propietario de asignación pendiente de aclaración.">Service technician is assigned and scheduled for on-site visit. Assignment owner pending process clarification.</div>
+        </div>
+        <div class="cycle-step orange-accent">
+          <div class="cycle-num">06</div>
+          <div class="cycle-title" data-en="Service Completes Job" data-es="Servicio Completa el Trabajo">Service Completes Job</div>
+          <div class="cycle-desc" data-en="Tech completes the job on site. If additional work is required and not covered by the original quote, payment is collected on site." data-es="El técnico completa el trabajo en sitio. Si se requiere trabajo adicional no cubierto por la cotización original, se recoge el pago en sitio.">Tech completes the job on site. If additional work is required beyond original quote, <strong>payment is collected on site</strong>.</div>
+        </div>
+        <div class="cycle-step" style="grid-column: 1 / -1;">
+          <div class="cycle-num">07</div>
+          <div class="cycle-title" data-en="Service is Complete — Lead Marked End of Stage / Pipeline" data-es="Servicio Completado — Lead Marcado Fin de Etapa / Pipeline">Service Complete — Lead Marked End of Stage / Pipeline</div>
+          <div class="cycle-desc" data-en="Service is marked complete in the pipeline. Rep is notified of completion. Professional Service Report is finalized and delivered to the customer." data-es="El servicio se marca como completado en el pipeline. Se notifica al rep. El Informe de Servicio Profesional se finaliza y entrega al cliente.">Service is marked complete. Rep is notified. Professional Service Report is finalized and delivered to the customer.</div>
+        </div>
+      </div>
+    </div>
+  </div><!-- /pane-post -->
+
+
+  <!-- ════════════════════════════ TAB 4: DOCUMENTS ════════════════════════════ -->
+  <div class="tab-pane" id="pane-docs">
+    <div class="intro-box" id="docs-intro">
+      The following documents must be completed and collected before a service appointment can be confirmed and before the service technician is dispatched.
+    </div>
+    <div class="sec-label" id="label-docs">Required Sales Documents / Documentos de Venta Requeridos</div>
+    <div class="docs-flow">
+      <div class="doc-step">
+        <div class="doc-icon"><svg width="22" height="22" viewBox="0 0 22 22" fill="none"><rect x="4" y="3" width="14" height="16" rx="2" stroke="white" stroke-width="1.8"/><path d="M7 8h8M7 12h8M7 16h5" stroke="white" stroke-width="1.6" stroke-linecap="round"/></svg></div>
+        <div class="doc-title" data-en="Payment Collected via Stripe in Command" data-es="Pago Recopilado vía Stripe en Command">Payment via Stripe in Command</div>
+        <div class="doc-desc" data-en="Full payment collected via Stripe through the Command platform before scheduling." data-es="Pago completo recopilado vía Stripe a través de la plataforma Command antes de programar.">Full payment via Stripe in Command platform — required before scheduling</div>
+      </div>
+      <div class="doc-arrow">→</div>
+      <div class="doc-step">
+        <div class="doc-icon"><svg width="22" height="22" viewBox="0 0 22 22" fill="none"><rect x="4" y="3" width="14" height="16" rx="2" stroke="white" stroke-width="1.8"/><path d="M8 11l2 2 4-4" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+        <div class="doc-title" data-en="Windmar Contract" data-es="Contrato Windmar">Windmar Contract</div>
+        <div class="doc-desc" data-en="Signed Windmar service contract outlining scope of work, pricing, and terms." data-es="Contrato de servicio Windmar firmado que describe el alcance del trabajo, precio y términos.">Signed service contract — scope, pricing, and terms</div>
+      </div>
+      <div class="doc-arrow">→</div>
+      <div class="doc-step">
+        <div class="doc-icon"><svg width="22" height="22" viewBox="0 0 22 22" fill="none"><path d="M11 4v3M11 15v3M4 11H7M15 11h3" stroke="white" stroke-width="1.8" stroke-linecap="round"/><circle cx="11" cy="11" r="4" stroke="white" stroke-width="1.8"/></svg></div>
+        <div class="doc-title" data-en="Windmar Waiver" data-es="Exoneración Windmar">Windmar Waiver</div>
+        <div class="doc-desc" data-en="Signed waiver acknowledging no workmanship warranty where applicable and scope limitations." data-es="Exoneración firmada que reconoce la ausencia de garantía de mano de obra (cuando aplica) y las limitaciones del alcance.">Signed waiver — acknowledges warranty limitations and scope</div>
+      </div>
+      <div class="doc-arrow">→</div>
+      <div class="doc-step">
+        <div class="doc-icon"><svg width="22" height="22" viewBox="0 0 22 22" fill="none"><rect x="3" y="5" width="16" height="12" rx="2" stroke="white" stroke-width="1.8"/><path d="M3 9h16" stroke="white" stroke-width="1.5"/><circle cx="7" cy="14" r="1.5" fill="white"/><path d="M11 14h5" stroke="white" stroke-width="1.5" stroke-linecap="round"/></svg></div>
+        <div class="doc-title" data-en="Reference Pictures (Optional)" data-es="Fotos de Referencia (Opcional)">Reference Pictures (Optional)</div>
+        <div class="doc-desc" data-en="Photos of the system and relevant equipment for documentation and technician preparation." data-es="Fotos del sistema y equipo relevante para documentación y preparación del técnico.">Photos of system/equipment — for technician preparation</div>
+      </div>
+    </div>
+  </div><!-- /pane-docs -->
+
+
+  <!-- ════════════════════════════ TAB 5: COMMISSIONS ════════════════════════════ -->
+  <div class="tab-pane" id="pane-spiff">
+    <div class="intro-box" id="spiff-intro">
+      Service leads for non-Windmar customers have a specific compensation structure. Review the criteria below carefully before communicating expectations to sales representatives.
+    </div>
+    <div class="sec-label" id="label-spiff">Sales Rep Bonus & Spiff Structure / Estructura de Bonos y Spiffs del Rep</div>
+    <table class="spiff-table">
+      <thead>
+        <tr>
+          <th>#</th>
+          <th data-en="Criteria" data-es="Criterio">Criteria</th>
+          <th data-en="Status" data-es="Estado">Status</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>1</td>
+          <td data-en="Qualifies for Commission" data-es="Califica para Comisión">Qualifies for Commission</td>
+          <td><span class="status-yes"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="7" fill="#2a7a4a"/><path d="M5 8l2 2 4-4" stroke="white" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg><span data-en="YES" data-es="SÍ">YES</span></span></td>
+        </tr>
+        <tr>
+          <td>2</td>
+          <td data-en="Does Not Qualify for Graduation" data-es="No Califica para Graduación">Does Not Qualify for Graduation</td>
+          <td><span class="status-no"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="7" fill="#c0392b"/><path d="M5.5 5.5l5 5M10.5 5.5l-5 5" stroke="white" stroke-width="1.7" stroke-linecap="round"/></svg><span data-en="NO" data-es="NO">NO</span></span></td>
+        </tr>
+        <tr>
+          <td>3</td>
+          <td data-en="Does Not Qualify for Spiff" data-es="No Califica para Spiff">Does Not Qualify for Spiff</td>
+          <td><span class="status-no"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="7" fill="#c0392b"/><path d="M5.5 5.5l5 5M10.5 5.5l-5 5" stroke="white" stroke-width="1.7" stroke-linecap="round"/></svg>NO</span></td>
+        </tr>
+        <tr>
+          <td>4</td>
+          <td data-en="Does Not Qualify for Points" data-es="No Califica para Puntos">Does Not Qualify for Points</td>
+          <td><span class="status-no"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="7" fill="#c0392b"/><path d="M5.5 5.5l5 5M10.5 5.5l-5 5" stroke="white" stroke-width="1.7" stroke-linecap="round"/></svg>NO</span></td>
+        </tr>
+        <tr>
+          <td>5</td>
+          <td data-en="Does Not Qualify for Overrides" data-es="No Califica para Overrides">Does Not Qualify for Overrides</td>
+          <td><span class="status-no"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="7" fill="#c0392b"/><path d="M5.5 5.5l5 5M10.5 5.5l-5 5" stroke="white" stroke-width="1.7" stroke-linecap="round"/></svg>NO</span></td>
+        </tr>
+        <tr>
+          <td>6</td>
+          <td data-en="Does Not Qualify for Quarterly Performance" data-es="No Califica para Rendimiento Trimestral">Does Not Qualify for Quarterly Performance</td>
+          <td><span class="status-no"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="7" fill="#c0392b"/><path d="M5.5 5.5l5 5M10.5 5.5l-5 5" stroke="white" stroke-width="1.7" stroke-linecap="round"/></svg>NO</span></td>
+        </tr>
+        <tr>
+          <td>7</td>
+          <td data-en="Does Not Qualify as a Sit" data-es="No Califica como Sit">Does Not Qualify as a Sit</td>
+          <td><span class="status-no"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="7" fill="#c0392b"/><path d="M5.5 5.5l5 5M10.5 5.5l-5 5" stroke="white" stroke-width="1.7" stroke-linecap="round"/></svg>NO</span></td>
+        </tr>
+      </tbody>
+    </table>
+    <div class="notes-box">
+      <div class="notes-head">
+        <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><circle cx="9" cy="9" r="7.5" stroke="#f7941d" stroke-width="1.7"/><path d="M9 5.5v5" stroke="#f7941d" stroke-width="2" stroke-linecap="round"/><circle cx="9" cy="13" r="1" fill="#f7941d"/></svg>
+        <div class="notes-head-text" data-en="Commission Summary" data-es="Resumen de Comisión">Commission Summary</div>
+      </div>
+      <ul class="notes-list">
+        <li><svg width="14" height="14" viewBox="0 0 14 14" fill="none" style="flex-shrink:0;margin-top:2px"><circle cx="7" cy="7" r="6" stroke="#c8921a" stroke-width="1.3"/><path d="M4.5 7.5L6 9l3.5-4" stroke="#c8921a" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg><span data-en="Sales reps DO earn commission on service lead sales." data-es="Los reps de ventas SÍ ganan comisión por ventas de leads de servicio.">Sales reps DO earn commission on service lead sales.</span></li>
+        <li><svg width="14" height="14" viewBox="0 0 14 14" fill="none" style="flex-shrink:0;margin-top:2px"><circle cx="7" cy="7" r="6" stroke="#c8921a" stroke-width="1.3"/><path d="M4.5 7.5L6 9l3.5-4" stroke="#c8921a" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg><span data-en="Service sales do NOT count toward graduation thresholds, spiffs, points, overrides, quarterly performance, or sit counts." data-es="Las ventas de servicio NO cuentan para umbrales de graduación, spiffs, puntos, overrides, rendimiento trimestral ni conteo de sits.">Service sales do NOT count toward graduation, spiffs, points, overrides, quarterly performance, or sit counts.</span></li>
+        <li><svg width="14" height="14" viewBox="0 0 14 14" fill="none" style="flex-shrink:0;margin-top:2px"><circle cx="7" cy="7" r="6" stroke="#c8921a" stroke-width="1.3"/><path d="M4.5 7.5L6 9l3.5-4" stroke="#c8921a" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg><span data-en="This structure applies specifically to the Non-Windmar Customer service lead product." data-es="Esta estructura aplica específicamente al producto de lead de servicio para Clientes No Windmar.">This structure applies specifically to the Non-Windmar Customer service lead product.</span></li>
+      </ul>
+    </div>
+  </div><!-- /pane-spiff -->
+
+</main>
+
+<footer>
+  <div class="footer-logo">WINDMAR<span> HOME</span></div>
+  <div class="footer-sub" id="footer-sub">Service Operations — Non-Windmar Customer SOP · Internal Use Only</div>
+</footer>
+
+<script>
+  let currentLang = 'en';
+  let currentTab = 'lead';
+
+  function switchTab(tab) {
+    currentTab = tab;
+    // panes
+    document.querySelectorAll('.tab-pane').forEach(p => p.classList.remove('active'));
+    document.getElementById('pane-' + tab).classList.add('active');
+    // buttons
+    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+    const btn = document.getElementById('tab-' + tab);
+    if (btn) btn.classList.add('active');
+    // mobile select
+    document.getElementById('mobileSelect').value = tab;
+  }
+
+  const T = {
+    en: {
+      'hero-title': 'Service to Non-Windmar Customers — Standard Operating Procedure',
+      'hero-sub': 'Guidelines for servicing solar systems not originally installed by Windmar Home',
+      'sop-pill': 'SOP Document',
+      'lead-intro': 'This SOP governs all service lead handling for customers whose solar and/or battery systems were <strong>not originally installed by Windmar Home</strong>. Follow the channel-specific entry procedure, then route through SAP for lead creation and closer assignment.',
+      'svc-intro': 'All services below are available to non-Windmar customers at published rates. Review included scope and warranty terms carefully with the customer before scheduling.',
+      'post-intro': 'Once a service lead is marked <strong>SOLD</strong>, the following cycle is initiated. NTP reviews the account, a service tech is scheduled, and the lead is closed in the pipeline upon job completion.',
+      'docs-intro': 'The following documents must be completed and collected before a service appointment can be confirmed and before the service technician is dispatched.',
+      'spiff-intro': 'Service leads for non-Windmar customers have a specific compensation structure. Review the criteria below carefully before communicating expectations to sales representatives.',
+      'footer-sub': 'Service Operations — Non-Windmar Customer SOP · Internal Use Only',
+    },
+    es: {
+      'hero-title': 'Servicio a Clientes No Windmar — Procedimiento Operativo Estándar',
+      'hero-sub': 'Guías para dar servicio a sistemas solares no instalados originalmente por Windmar Home',
+      'sop-pill': 'Documento POE',
+      'lead-intro': 'Este POE rige el manejo de todos los leads de servicio para clientes cuyos sistemas solares y/o de batería <strong>no fueron instalados originalmente por Windmar Home</strong>. Sigue el procedimiento de entrada específico del canal y luego enruta a través de SAP para la creación y asignación del lead.',
+      'svc-intro': 'Todos los servicios a continuación están disponibles para clientes no Windmar a tarifas publicadas. Revisa el alcance incluido y los términos de garantía detenidamente con el cliente antes de programar.',
+      'post-intro': 'Una vez que un lead de servicio es marcado como <strong>VENDIDO</strong>, se inicia el siguiente ciclo. NTP revisa la cuenta, se programa un técnico de servicio y el lead se cierra en el pipeline al finalizar el trabajo.',
+      'docs-intro': 'Los siguientes documentos deben completarse y recopilarse antes de que se pueda confirmar una cita de servicio y antes de que se despache al técnico.',
+      'spiff-intro': 'Los leads de servicio para clientes no Windmar tienen una estructura de compensación específica. Revisa los criterios a continuación antes de comunicar expectativas a los representantes de ventas.',
+      'footer-sub': 'Operaciones de Servicio — POE Cliente No Windmar · Solo Uso Interno',
+    }
+  };
+
+  function setLang(lang) {
+    currentLang = lang;
+    document.getElementById('btnEN').classList.toggle('active', lang === 'en');
+    document.getElementById('btnES').classList.toggle('active', lang === 'es');
+    const t = T[lang];
+    for (const [id, val] of Object.entries(t)) {
+      const el = document.getElementById(id);
+      if (el) el.innerHTML = val;
+    }
+    document.querySelectorAll('[data-en]').forEach(el => {
+      el.textContent = lang === 'en' ? el.getAttribute('data-en') : el.getAttribute('data-es');
+    });
+    // tab buttons
+    document.querySelectorAll('.tab-btn[data-en]').forEach(el => {
+      el.textContent = lang === 'en' ? el.getAttribute('data-en') : el.getAttribute('data-es');
+    });
+    // mobile select options
+    document.querySelectorAll('#mobileSelect option[data-en]').forEach(el => {
+      el.textContent = lang === 'en' ? el.getAttribute('data-en') : el.getAttribute('data-es');
+    });
+    document.documentElement.lang = lang;
+  }
+
+  setLang('en');
+</script>
+</body>
+</html>
